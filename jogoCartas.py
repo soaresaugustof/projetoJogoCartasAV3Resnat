@@ -2,9 +2,13 @@ from cartas import montarBaralho, numeros
 
 def distribuir():
     baralho = montarBaralho()
-    maos = [baralho[i:i+3] for i in range(0, len(baralho), 3)]
-    cartasMesa = baralho[-2:]
-    return maos, cartasMesa
+    if len(baralho) < 12:
+        raise ValueError("Número insuficiente de cartas no baralho para distribuir para 4 jogadores.")
+    
+    maos_jogadores = [baralho[i:i+3] for i in range(0, 12, 3)]  # Cada jogador recebe exatamente 3 cartas
+    cartas_mesa = baralho[-2:]
+    
+    return maos_jogadores, cartas_mesa
 
 def calcularPontuacao(cartas, numeros):
     pontuacao = 0
